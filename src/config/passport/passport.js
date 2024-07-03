@@ -45,7 +45,8 @@ const initializePassport = () => {
         done(null, user)
     })
 
-    passport.use('login', new localStrategy({ usernameField: 'email' }, async (username, password, done) => {
+    passport.use('login', new localStrategy(
+        { usernameField: 'email' }, async (username, password, done) => {
         try {
             const user = await userModel.findOne({ email: username }).lean()
             if (user && validatePassword(password, user.password)) {
@@ -53,8 +54,8 @@ const initializePassport = () => {
             } else {
                 return done(null, false)
             }
-        } catch (e) {
-            return done(e)
+        } catch (error) {
+            return done(error)
         }
     }))
     /*

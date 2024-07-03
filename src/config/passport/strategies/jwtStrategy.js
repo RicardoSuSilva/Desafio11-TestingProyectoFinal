@@ -31,7 +31,7 @@ export const strategyJWT = new JwtStrategy(jwtOptions, async (payload, done) => 
             return done(null, false);
         }
         return done(null, user);
-    } catch (e) {
-        return done(e, null);
+    } catch (error) {
+        return done(error, null);
     }
 })
